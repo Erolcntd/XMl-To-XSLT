@@ -37,17 +37,13 @@ class MainForm(tk.Tk):
         
         if os.path.exists(xml_file_path) and os.path.exists(xslt_file_path):
             try:
-                # XML dosyasını yükle
                 xml_tree = ET.parse(xml_file_path)
                 
-                # XSLT dosyasını yükle
                 xslt_tree = ET.parse(xslt_file_path)
                 transform = ET.XSLT(xslt_tree)
                 
-                # Dönüştürme işlemini gerçekleştir
                 result_tree = transform(xml_tree)
                 
-                # Yeni bir çıktı dosyası oluştur
                 output_file_path = os.path.splitext(xml_file_path)[0] + "_output.xml"
                 result_tree.write(output_file_path, pretty_print=True, encoding="utf-8")
                 
